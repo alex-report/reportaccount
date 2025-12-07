@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Order – Social Media Report Tool</title>
+<style>
+    /* ---------- RESET ---------- */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: #f7f9fc;
+        color: #333;
+    }
+
+    /* ---------- HEADER ---------- */
+    header {
+        background: #0a0f24;
+        padding: 15px 40px;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .logo img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 10px;
+    }
+
+    nav a {
+        color: white;
+        margin-left: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    nav a:hover {
+        color: #4dd0ff;
+    }
+
+    /* ---------- CONTAINER ---------- */
+    .container {
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 32px;
+    }
+
+    label {
+        font-weight: bold;
+        display: block;
+        margin-top: 20px;
+    }
+
+    select, input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    .info-box {
+        background: #eef7ff;
+        padding: 15px;
+        border-left: 4px solid #4dd0ff;
+        margin-top: 20px;
+        border-radius: 4px;
+        font-size: 15px;
+    }
+
+    .btn {
+        margin-top: 25px;
+        padding: 14px;
+        width: 100%;
+        background: #4dd0ff;
+        border: none;
+        font-size: 18px;
+        color: #0a0f24;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background: #72e4ff;
+    }
+
+    .error {
+        color: red;
+        margin-top: 10px;
+        font-size: 15px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+        header {
+            padding: 15px 20px;
+        }
+
+        nav {
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 10px;
+        }
+
+        nav a {
+            margin-left: 0;
+            margin-top: 10px;
+        }
+
+        .container {
+            margin: 20px 15px;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 28px;
+        }
+
+        select, input {
+            font-size: 15px;
+            padding: 10px;
+        }
+
+        .btn {
+            font-size: 16px;
+            padding: 12px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h2 {
+            font-size: 24px;
+        }
+
+        select, input {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .btn {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        .info-box {
+            font-size: 14px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="logo.png" alt="SM Report Tool Logo">
+        <span>Report Tool</span>
+    </div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="new-order.html">New Order</a>
+        <a href="orders.html">Orders</a>
+        <a href="faq.html">FAQ</a>
+        <a href="article.html">Article</a>
+    </nav>
+</header>
+
+<div class="container">
+    <h2>New Order</h2>
+
+    <label>Category</label>
+    <select id="category">
+        <option value="">Select Category</option>
+        <option>Facebook Account</option>
+        <option>Instagram Account</option>
+        <option>TikTok Account</option>
+        <option>Telegram Channel</option>
+    </select>
+
+    <label>Description</label>
+    <div class="info-box">
+        🔗 <strong>Link format:</strong> <br>
+        👥 <strong>Note:</strong> Test capacity simulation only.<br>
+        🎯 <strong>Success Rate:</strong> Varies depending on the test scenario.<br>
+        📊 <strong>Notes:</strong> Different pages require different analysis depth.<br>
+        🌐 <strong>IP Policy:</strong> All operations follow strict compliance rules.<br>
+        ⚠️ <strong>Reminder:</strong> Do not submit duplicate test requests with the same link. <br>
+        <strong>⚠️</strong> After order completion, please allow 1-2 days to observe if the page is banned, as there might be a delay in the reporting effect.<br>
+    </div>
+
+    <label>Link</label>
+    <input id="link" type="text" placeholder="Enter link">
+
+    <label>Quantity (Min: 5000 – Max: 1,000,000)</label>
+    <input id="quantity" type="number" placeholder="Enter quantity">
+
+    <label>Charge</label>
+    <input id="charge" type="text" placeholder="Automatically calculated" readonly>
+
+    <div id="error-message" class="error"></div>
+
+    <button class="btn" onclick="submitOrder()">Submit Order</button>
+</div>
+
+<script>
+    const quantityInput = document.getElementById("quantity");
+    const chargeInput = document.getElementById("charge");
+    const errorBox = document.getElementById("error-message");
+
+    quantityInput.addEventListener("input", function () {
+        let qty = parseInt(quantityInput.value);
+
+        if (qty < 5000 || qty > 1000000) {
+            chargeInput.value = "Quantity must be 5,000 – 1,000,000";
+            return;
+        }
+
+        let pricePerUnit = 80 / 5000; // = 0.016
+        let total = qty * pricePerUnit;
+
+        chargeInput.value = "$" + total.toFixed(2);
+    });
+
+    function submitOrder() {
+        let link = document.getElementById("link").value.trim();
+        let qty = parseInt(quantityInput.value);
+        let category = document.getElementById("category").value;
+
+        errorBox.textContent = ""; // Clear errors
+
+        if (category === "") {
+            errorBox.textContent = "Please select a category.";
+            return;
+        }
+
+        if (link === "") {
+            errorBox.textContent = "Please enter a valid link.";
+            return;
+        }
+
+        if (!qty || qty < 5000 || qty > 1000000) {
+            errorBox.textContent = "Quantity must be between 5,000 and 1,000,000.";
+            return;
+        }
+
+        // Redirect to payment page
+        window.location.href = "payment.html";
+    }
+</script>
+
+</body>
+</html>

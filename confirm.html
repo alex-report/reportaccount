@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Confirm Payment</title>
+
+<style>
+    body {
+        background:#0f172a;
+        color:white;
+        font-family:Poppins, sans-serif;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        flex-direction:column;
+    }
+
+    .box {
+        background:#1e293b;
+        padding:25px;
+        border-radius:16px;
+        width:400px;
+        text-align:center;
+        border:1px solid #334155;
+    }
+
+    .address {
+        margin-top:10px;
+        padding:12px;
+        background:#0f172a;
+        border-radius:10px;
+        border:1px solid #334155;
+        word-wrap:break-word;
+        font-size:14px;
+    }
+
+    button {
+        padding:12px 20px;
+        margin-top:20px;
+        border:none;
+        background:#10b981;
+        color:white;
+        border-radius:12px;
+        cursor:pointer;
+        font-size:16px;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="box">
+    <h2>Your Payment Method</h2>
+
+    <p id="method"></p>
+    <div class="address" id="wallet"></div>
+
+    <button onclick="confirm()">Confirm & Pay</button>
+</div>
+
+<script>
+    document.getElementById("method").textContent = localStorage.getItem("payment_method");
+    document.getElementById("wallet").textContent = localStorage.getItem("payment_address");
+
+    function confirm() {
+        window.location.href = "processing.html";
+    }
+</script>
+
+</body>
+</html>

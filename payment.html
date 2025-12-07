@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment – Social Media Report Tool</title>
+<style>
+    /* ---------- RESET ---------- */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background:#0b1220;
+        color:white;
+        font-family:Poppins, sans-serif;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        height:100vh;
+        padding:0 10px;
+    }
+
+    .container {
+        width:100%;
+        max-width:400px;
+        background:#141c2c;
+        padding:28px;
+        border-radius:18px;
+        border:1px solid #263248;
+        box-shadow:0px 10px 30px rgba(0,0,0,0.4);
+        text-align:center;
+    }
+
+    /* ---------- LOGO ---------- */
+    .logo {
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin-bottom:20px;
+    }
+
+    .logo img {
+        width:50px;
+        height:50px;
+        margin-right:10px;
+    }
+
+    .logo span {
+        font-size:22px;
+        font-weight:700;
+        color:white;
+    }
+
+    h2 {
+        font-weight:600;
+        margin-bottom:18px;
+    }
+
+    .method {
+        display:flex;
+        align-items:center;
+        gap:12px;
+        padding:14px;
+        background:#0b1220;
+        border:1px solid #263248;
+        border-radius:12px;
+        margin-top:12px;
+        cursor:pointer;
+        transition:0.2s;
+        font-size:16px;
+    }
+
+    .method img {
+        width:38px;
+        height:38px;
+    }
+
+    .method:hover {
+        border-color:#3affc2;
+    }
+
+    .method.selected {
+        border-color:#3affc2;
+        background:#102038;
+    }
+
+    .address-box {
+        margin-top:18px;
+        padding:14px;
+        background:#0b1220;
+        border:1px solid #263248;
+        border-radius:12px;
+        display:none;
+        word-wrap:break-word;
+        font-size:14px;
+        text-align:left;
+    }
+
+    button {
+        width:100%;
+        padding:14px;
+        margin-top:22px;
+        background:#3affc2;
+        color:black;
+        border:none;
+        border-radius:12px;
+        font-size:16px;
+        font-weight:600;
+        cursor:pointer;
+        transition:0.2s;
+    }
+
+    button:hover {
+        background:#29eaaa;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 480px) {
+        .container {
+            padding:20px;
+        }
+
+        .method {
+            font-size:14px;
+            padding:10px;
+        }
+
+        .method img {
+            width:30px;
+            height:30px;
+        }
+
+        .address-box {
+            font-size:13px;
+            padding:10px;
+        }
+
+        button {
+            font-size:14px;
+            padding:12px;
+        }
+
+        .logo img {
+            width:40px;
+            height:40px;
+        }
+
+        .logo span {
+            font-size:18px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- LOGO -->
+    <div class="logo">
+        <img src="logo.png" alt="SM Report Tool Logo">
+        <span>SM Report Tool</span>
+    </div>
+
+    <h2>Select Payment Method</h2>
+
+    <!-- USDT TRC20 -->
+    <div class="method" onclick="choose('USDT')">
+        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT">
+        <strong>USDT (TRC20)</strong>
+    </div>
+
+    <!-- USDT ERC20 -->
+    <div class="method" onclick="choose('ERC20')">
+        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT ERC20">
+        <strong>USDT (ERC20)</strong>
+    </div>
+
+    <!-- BITCOIN -->
+    <div class="method" onclick="choose('BTC')">
+        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC">
+        <strong>Bitcoin (BTC)</strong>
+    </div>
+
+    <!-- SOLANA -->
+    <div class="method" onclick="choose('SOL')">
+        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL">
+        <strong>Solana (SOL)</strong>
+    </div>
+
+    <!-- ADDRESS BOX -->
+    <div id="address" class="address-box"></div>
+
+    <button onclick="submitPayment()">Submit</button>
+</div>
+
+<script>
+    let selected = null;
+
+    function choose(type) {
+        selected = type;
+
+        document.querySelectorAll(".method").forEach(el => el.classList.remove("selected"));
+        event.currentTarget.classList.add("selected");
+
+        let addressBox = document.getElementById("address");
+
+        // PAYMENT ADDRESSES
+        if (type === "USDT") {
+            addressBox.innerHTML = "USDT TRC20 Address:<br><strong>888888</strong>";
+        }
+        if (type === "ERC20") {
+            addressBox.innerHTML = "USDT ERC20 Address:<br><strong>0xERC20_ADDRESS</strong>";
+        }
+        if (type === "BTC") {
+            addressBox.innerHTML = "Bitcoin BTC Address:<br><strong>bc1BTC_ADDRESS</strong>";
+        }
+        if (type === "SOL") {
+            addressBox.innerHTML = "Solana SOL Address:<br><strong>SOL_ADDRESS</strong>";
+        }
+
+        addressBox.style.display = "block";
+    }
+
+    function submitPayment() {
+        if (!selected) {
+            alert("Please select a payment method first.");
+            return;
+        }
+        window.location.href = "processing.html";
+    }
+</script>
+
+</body>
+</html>

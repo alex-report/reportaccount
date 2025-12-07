@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Processing</title>
+
+<style>
+    body {
+        background:#0b1220;
+        color:white;
+        font-family:Poppins, sans-serif;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        height:100vh;
+        text-align:center;
+    }
+
+    .loader {
+        border:8px solid #263248;
+        border-top:8px solid #3affc2;
+        width:85px;
+        height:85px;
+        border-radius:50%;
+        animation:spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform:rotate(0deg); }
+        100% { transform:rotate(360deg); }
+    }
+
+    h2 { margin-top:20px; }
+</style>
+
+</head>
+<body>
+
+<div class="loader"></div>
+<h2>Verifying Payment...</h2>
+<p>This may take up to 30 minutes.</p>
+
+<script>
+    // 30 minutes = 30 * 60 * 1000 ms
+    setTimeout(() => {
+        window.location.href = "success.html";
+    }, 1800000); // 1,800,000 ms = 30 minutes
+</script>
+
+</body>
+</html>
