@@ -5,11 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payment – Social Media Report Tool</title>
 <style>
-    /* ---------- RESET ---------- */
     * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
     }
 
     body {
@@ -19,13 +18,13 @@
         display:flex;
         justify-content:center;
         align-items:center;
-        height:100vh;
-        padding:0 10px;
+        min-height:100vh;
+        padding:20px;
     }
 
     .container {
         width:100%;
-        max-width:400px;
+        max-width:420px;
         background:#141c2c;
         padding:28px;
         border-radius:18px;
@@ -34,7 +33,6 @@
         text-align:center;
     }
 
-    /* ---------- LOGO ---------- */
     .logo {
         display:flex;
         justify-content:center;
@@ -59,44 +57,51 @@
         margin-bottom:18px;
     }
 
-    .method {
-        display:flex;
-        align-items:center;
-        gap:12px;
-        padding:14px;
-        background:#0b1220;
-        border:1px solid #263248;
-        border-radius:12px;
-        margin-top:12px;
-        cursor:pointer;
-        transition:0.2s;
-        font-size:16px;
-    }
-
-    .method img {
-        width:38px;
-        height:38px;
-    }
-
-    .method:hover {
-        border-color:#3affc2;
-    }
-
-    .method.selected {
-        border-color:#3affc2;
-        background:#102038;
-    }
-
     .address-box {
         margin-top:18px;
-        padding:14px;
-        background:#0b1220;
-        border:1px solid #263248;
-        border-radius:12px;
-        display:none;
+        padding:16px;
+        background:linear-gradient(145deg, #1f2a40, #141c2c);
+        border-radius:16px;
+        border:1px solid #3affc2;
+        box-shadow: 0 5px 15px rgba(0,255,194,0.2);
         word-wrap:break-word;
         font-size:14px;
-        text-align:left;
+        text-align:center;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:10px;
+        transition:0.3s;
+    }
+
+    .address-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,255,194,0.3);
+    }
+
+    .crypto-logo {
+        width:50px;
+        height:50px;
+    }
+
+    .crypto-address {
+        background:#0b1220;
+        padding:8px 12px;
+        border-radius:12px;
+        border:1px solid #263248;
+        font-family:monospace;
+        font-size:14px;
+        overflow-wrap:anywhere;
+        color:#3affc2;
+        font-weight:600;
+        width:100%;
+        text-align:center;
+    }
+
+    .qr-code {
+        margin-top:8px;
+        width:150px;
+        height:150px;
     }
 
     button {
@@ -117,39 +122,27 @@
         background:#29eaaa;
     }
 
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 480px) {
+    @media (max-width:480px) {
         .container {
             padding:20px;
         }
-
-        .method {
-            font-size:14px;
-            padding:10px;
-        }
-
-        .method img {
-            width:30px;
-            height:30px;
-        }
-
         .address-box {
-            font-size:13px;
-            padding:10px;
-        }
-
-        button {
-            font-size:14px;
             padding:12px;
         }
-
-        .logo img {
+        .crypto-logo {
             width:40px;
             height:40px;
         }
-
-        .logo span {
-            font-size:18px;
+        .crypto-address {
+            font-size:13px;
+        }
+        .qr-code {
+            width:120px;
+            height:120px;
+        }
+        button {
+            font-size:14px;
+            padding:12px;
         }
     }
 </style>
@@ -158,81 +151,43 @@
 
 <div class="container">
 
-    <!-- LOGO -->
     <div class="logo">
         <img src="logo.png" alt="SM Report Tool Logo">
         <span>SM Report Tool</span>
     </div>
 
-    <h2>Select Payment Method</h2>
+    <h2>Payment Addresses</h2>
 
     <!-- USDT TRC20 -->
-    <div class="method" onclick="choose('USDT')">
-        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT">
-        <strong>USDT (TRC20)</strong>
+    <div class="address-box">
+        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT Logo" class="crypto-logo">
+        <div class="crypto-address">TXbAp1pAkN2SK4F4d25fHX232dhzEnNM9n</div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=TXbAp1pAkN2SK4F4d25fHX232dhzEnNM9n&size=150x150" alt="USDT TRC20 QR" class="qr-code">
     </div>
 
     <!-- USDT ERC20 -->
-    <div class="method" onclick="choose('ERC20')">
-        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT ERC20">
-        <strong>USDT (ERC20)</strong>
+    <div class="address-box">
+        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT ERC20 Logo" class="crypto-logo">
+        <div class="crypto-address">0x0370c48c5efa3559afecf53d9e7ba6fbef2f5c52</div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=0x0370c48c5efa3559afecf53d9e7ba6fbef2f5c52&size=150x150" alt="USDT ERC20 QR" class="qr-code">
     </div>
 
-    <!-- BITCOIN -->
-    <div class="method" onclick="choose('BTC')">
-        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC">
-        <strong>Bitcoin (BTC)</strong>
+    <!-- Bitcoin -->
+    <div class="address-box">
+        <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC Logo" class="crypto-logo">
+        <div class="crypto-address">14xosRGoot4d3Mm4mN8V5hXaGu1urnzvWE</div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=14xosRGoot4d3Mm4mN8V5hXaGu1urnzvWE&size=150x150" alt="BTC QR" class="qr-code">
     </div>
 
-    <!-- SOLANA -->
-    <div class="method" onclick="choose('SOL')">
-        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL">
-        <strong>Solana (SOL)</strong>
+    <!-- Solana -->
+    <div class="address-box">
+        <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="SOL Logo" class="crypto-logo">
+        <div class="crypto-address">AVkq87SJospGSqnY5qy9ccDAzmkMLchvRxKM9mVMUZqS</div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?data=AVkq87SJospGSqnY5qy9ccDAzmkMLchvRxKM9mVMUZqS&size=150x150" alt="SOL QR" class="qr-code">
     </div>
 
-    <!-- ADDRESS BOX -->
-    <div id="address" class="address-box"></div>
-
-    <button onclick="submitPayment()">Submit</button>
+    <button onclick="window.location.href='processing.html'">Submit</button>
 </div>
-
-<script>
-    let selected = null;
-
-    function choose(type) {
-        selected = type;
-
-        document.querySelectorAll(".method").forEach(el => el.classList.remove("selected"));
-        event.currentTarget.classList.add("selected");
-
-        let addressBox = document.getElementById("address");
-
-        // PAYMENT ADDRESSES
-        if (type === "USDT") {
-            addressBox.innerHTML = "USDT TRC20 Address:<br><strong>TXbAp1pAkN2SK4F4d25fHX232dhzEnNM9n</strong>";
-        }
-        if (type === "ERC20") {
-            addressBox.innerHTML = "USDT ERC20 Address:<br><strong>0x0370c48c5efa3559afecf53d9e7ba6fbef2f5c52</strong>";
-        }
-        if (type === "BTC") {
-            addressBox.innerHTML = "Bitcoin BTC Address:<br><strong>14xosRGoot4d3Mm4mN8V5hXaGu1urnzvWE</strong>";
-        }
-        if (type === "SOL") {
-            addressBox.innerHTML = "Solana SOL Address:<br><strong>AVkq87SJospGSqnY5qy9ccDAzmkMLchvRxKM9mVMUZqS</strong>";
-        }
-
-        addressBox.style.display = "block";
-    }
-
-    function submitPayment() {
-        if (!selected) {
-            alert("Please select a payment method first.");
-            return;
-        }
-        window.location.href = "processing.html";
-    }
-</script>
 
 </body>
 </html>
-
